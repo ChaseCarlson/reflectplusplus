@@ -5,7 +5,7 @@ cmake_minimum_required (VERSION 3.8)
 project(demo)
 
 # Add source to this project's executable.
-add_executable (demo "demo.cpp" "A.h" "B.h")
+add_executable (demo "demo.cpp" "A.h" "B.h" "A.cpp" "B.cpp")
 
 target_link_libraries(demo PRIVATE reflectplusplus)
 target_include_directories(demo PUBLIC

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "reflectplusplus/registration.h"
+#include "A.h"
 
 class B : public A {
-	RPP_TYPE(B, A);
+	RPP_TYPE()
 };

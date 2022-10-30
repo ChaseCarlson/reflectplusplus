@@ -3,16 +3,16 @@
 
 #include "demo.h"
 #include <iostream>
-#include "reflectplusplus/property.h"
+#include "reflectplusplus/type.h"
 
 #include "A.h"
 #include "B.h"
 
-//static rpp::property<ExampleClass, int> prop_name();
-
 int main()
 {
-	std::cout << B::get_type().get_name() << std::endl;
-	std::cout << "Hello CMake." << std::endl;
+	B b;
+	A* a = &b;
+	std::cout << a->get_type().get_name() << std::endl;
+	std::cout << "reflectplusplus demo!" << std::endl;
 	return 0;
 }
