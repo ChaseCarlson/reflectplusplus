@@ -5,8 +5,16 @@
 namespace rpp {
 	template<typename Class, typename T>
 	class property {
-		property() {
-			std::cout << "ok" << std::endl;
+		rpp::type clazz;
+		rpp::type type;
+		std::string name;
+
+	public:
+		property(std::string name)
+		{
+			this->clazz = rpp::type::get_type<Class>();
+			this->type = rpp::type::create<T>();
+			this->name = name;
 		}
 	};
 }

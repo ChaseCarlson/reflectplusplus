@@ -8,7 +8,7 @@
 
 namespace rpp {
 	class type {
-		static std::map<size_t, rpp::type*> registry;
+		static std::map<size_t, rpp::type> registry;
 
 		size_t id;
 		std::string name;
@@ -24,7 +24,7 @@ namespace rpp {
 		template<typename T>
 		static rpp::type& get_type()
 		{
-			return *registry[typeid(T).hash_code()];
+			return registry[typeid(T).hash_code()];
 		}
 
 		template<typename T>
@@ -36,20 +36,31 @@ namespace rpp {
 		template<typename T>
 		static rpp::type& create(std::string name)
 		{
-			rpp::type* newType = new rpp::type;
-			newType->id = typeid(T).hash_code();
-			newType->name = name;
-			newType->size = sizeof(T);
+			size_t tid = typeid(T).hash_code();
 
-			registry[newType->id] = newType;
+			if (!(registry.find(tid) == registry.end()))
+				return registry[tid];
 
-			return *newType;
+			rpp::type newType;
+			newType.id = tid;
+			newType.name = name;
+			newType.size = sizeof(T);
+
+			registry[newType.id] = newType;
+
+			return registry[newType.id];
+		}
+
+		template<typename T>
+		static rpp::type& create()
+		{
+			return rpp::type::create<T>(typeid(T).name());
 		}
 
 		template<typename T, typename Super>
-		static rpp::type create(std::string name)
+		static rpp::type& create(std::string name)
 		{
-			rpp::type newType create<T>(name);
+			rpp::type& newType = create<T>(name);
 			newType.super = typeid(Super).hash_code();
 
 			return newType;

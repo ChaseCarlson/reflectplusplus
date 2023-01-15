@@ -2,7 +2,7 @@
 
 #include "type.h"
 
-std::map<size_t, rpp::type*> rpp::type::registry;
+std::map<size_t, rpp::type> rpp::type::registry;
 
 bool rpp::type::operator==(rpp::type& other)
 {
